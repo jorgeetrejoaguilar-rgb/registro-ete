@@ -1,4 +1,4 @@
-import java.util.Scanner;
+simport java.util.Scanner;
 
 class Main 
 {
@@ -21,7 +21,13 @@ class Main
             switch (opcion) 
             {
                 case 1:
-                    System.out.println("");
+                    if (total >=100)
+                    {
+                        System.out.println("Capacidad a full");
+                        break;
+
+                    }
+                    
                     break;
 
                 case 2:
