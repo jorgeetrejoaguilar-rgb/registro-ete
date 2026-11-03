@@ -1,51 +1,32 @@
-simport java.util.Scanner;
+import java.util.Scanner;
 
-class Main 
+class Main
 {
-    public static void main(String args[]) 
+    public static void main(String args[])
     {
         Scanner teclado = new Scanner(System.in);
+        Registro reg = new Registro(teclado);
         int opcion;
 
-        do 
+        do
         {
-            System.out.println("\n--- REGISTRO ETE (AVANCE 1) ---");
+            System.out.println("\n--- REGISTRO ETE ---");
             System.out.println("1. Registrar estudiante");
-            System.out.println("2. Captura calificaciones (Pendiente)");
-            System.out.println("3. Consulta de datos (Pendiente)");
+            System.out.println("2. Capturar calificaciones");
+            System.out.println("3. Consulta de datos");
             System.out.println("4. Salir");
             System.out.print("Opcion: ");
-            opcion = teclado.nextInt();
-            teclado.nextLine(); // Limpiar el buffer
+            opcion = Integer.parseInt(teclado.nextLine());
 
-            switch (opcion) 
+            switch (opcion)
             {
-                case 1:
-                    if (total >=100)
-                    {
-                        System.out.println("Capacidad a full");
-                        break;
-
-                    }
-                    
-                    break;
-
-                case 2:
-                    System.out.println("");
-                    break;
-
-                case 3:
-                    System.out.println("");
-                    break;
-
-                case 4:
-                    System.out.println("");
-                    break;
-
-                default:
-                    System.out.println("");
+                case 1: reg.registrar();     break;
+                case 2: reg.capturarCalif(); break;
+                case 3: reg.consultar();     break;
+                case 4: System.out.println("Adios"); break;
+                default: System.out.println("Opcion invalida");
             }
-        } 
+        }
         while (opcion != 4);
     }
-}   
+}
