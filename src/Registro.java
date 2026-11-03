@@ -96,7 +96,100 @@ class Registro
 
     public void capturarCalif()
     {
-        System.out.println("Pendiente");
+            // Devuelve la posicion del alumno, o -1 si no existe
+    private int buscar(String nocta)
+    {
+        for (int i = 0; i < total; i++)
+            if (alumnos[i].despNocta().equals(nocta))
+                return i;
+        return -1;
+    }
+
+    // Pide una calificacion hasta que este entre 0 y 10
+    private double leerCal()
+    {
+        double c;
+        do
+        {
+            System.out.print("(0-10): ");
+            c = Double.parseDouble(teclado.nextLine());
+        }
+        while (c < 0 || c > 10);
+        return c;
+    }
+
+    public void capturarCalif()
+    {
+        System.out.println("1. Individual   2. Por grupo");
+        System.out.print("Opcion: ");
+        int op = leerInt();
+        if (op == 1)
+            califIndividual();
+        else if (op == 2)
+            califGrupo();
+        else
+            System.out.println("Opcion invalida");
+    }
+
+    private void califIndividual()
+    {
+        System.out.print("Numero de cuenta: ");
+        int i = buscar(teclado.nextLine());
+        if (i == -1)
+        {
+            System.out.println("No existe ese alumno");
+            return;
+        }
+
+        System.out.println("1. Periodo 1  2. Periodo 2  3. Periodo 3  4. Todos");
+        System.out.print("Opcion: ");
+        int p = leerInt();
+        if (p >= 1 && p <= 3)
+        {
+            System.out.print("Periodo " + p + " ");
+            alumnos[i].asignaCal(p, leerCal());
+        }
+        else if (p == 4)
+        {
+            for (int k = 1; k <= 3; k++)
+            {
+                System.out.print("Periodo " + k + " ");
+                alumnos[i].asignaCal(k, leerCal());
+            }
+        }
+        else
+        {
+            System.out.println("Opcion invalida");
+            return;
+        }
+        System.out.println("Promedio: " + alumnos[i].despPromedio());
+    }
+
+    private void califGrupo()
+    {
+        System.out.print("Grupo ETE: ");
+        String g = teclado.nextLine();
+        System.out.print("Periodo (1-3): ");
+        int p = leerInt();
+        if (p < 1 || p > 3)
+        {
+            System.out.println("Periodo invalido");
+            return;
+        }
+
+        boolean hay = false;
+        for (int i = 0; i < total; i++)
+        {
+            if (alumnos[i].despGrupoEte().equals(g))
+            {
+                hay = true;
+                System.out.print(alumnos[i].despNom() + " ");
+                alumnos[i].asignaCal(p, leerCal());
+            }
+        }
+        if (!hay)
+            System.out.println("No hay alumnos en ese grupo");
+    }
     }
 
     public void consultar()
