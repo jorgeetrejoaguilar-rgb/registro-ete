@@ -6,7 +6,6 @@ class Registro
     private AlumnoETE[] alumnos = new AlumnoETE[100];
     private int total = 0;
 
-    // Catalogo: la posicion de cada ETE coincide en los 3 arreglos
     private String[] etes = {"Computacion", "Contabilidad",
                              "Ensenanza del ingles", "Hispatologia"};
     private String[][] gruposM = {{"61B", "61C"}, {"6211"}, {"6E1B"}, {}};
@@ -22,11 +21,35 @@ class Registro
         return Integer.parseInt(teclado.nextLine());
     }
 
+    private int buscar(String nocta)
+    {
+        for (int i = 0; i < total; i++)
+        {
+            if (alumnos[i].despNocta().equals(nocta))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private double leerCal()
+    {
+        double c;
+        do
+        {
+            System.out.print("Calificacion (0-10): ");
+            c = Double.parseDouble(teclado.nextLine());
+        }
+        while (c < 0 || c > 10);
+        return c;
+    }
+
     public void registrar()
     {
         if (total >= 100)
         {
-            System.out.println("Capacidad a full");
+            System.out.println("Capacidad llena");
             return;
         }
 
@@ -39,9 +62,10 @@ class Registro
         System.out.print("Grupo curricular: ");
         a.asignaGrupo(teclado.nextLine());
 
-        // ETE
         for (int i = 0; i < etes.length; i++)
+        {
             System.out.println((i + 1) + ". " + etes[i]);
+        }
         System.out.print("ETE: ");
         int e = leerInt() - 1;
         if (e < 0 || e >= etes.length)
@@ -51,7 +75,6 @@ class Registro
         }
         a.asignaEte(etes[e]);
 
-        // Turno
         System.out.print("Turno (1. Matutino  2. Vespertino): ");
         int t = leerInt();
         String[] grupos;
@@ -76,9 +99,10 @@ class Registro
             return;
         }
 
-        // Grupo
         for (int i = 0; i < grupos.length; i++)
+        {
             System.out.println((i + 1) + ". " + grupos[i]);
+        }
         System.out.print("Grupo: ");
         int g = leerInt() - 1;
         if (g < 0 || g >= grupos.length)
@@ -88,34 +112,9 @@ class Registro
         }
         a.asignaGrupoEte(grupos[g]);
 
-        // Solo se guarda si todo salio bien
         alumnos[total] = a;
         total++;
-        System.out.println("Alumno registrado. Total: " + total);
-    }
-
-    public void capturarCalif()
-    {
-            // Devuelve la posicion del alumno, o -1 si no existe
-    private int buscar(String nocta)
-    {
-        for (int i = 0; i < total; i++)
-            if (alumnos[i].despNocta().equals(nocta))
-                return i;
-        return -1;
-    }
-
-    // Pide una calificacion hasta que este entre 0 y 10
-    private double leerCal()
-    {
-        double c;
-        do
-        {
-            System.out.print("(0-10): ");
-            c = Double.parseDouble(teclado.nextLine());
-        }
-        while (c < 0 || c > 10);
-        return c;
+        System.out.println("Alumno registrado con exito. Total: " + total);
     }
 
     public void capturarCalif()
@@ -124,11 +123,17 @@ class Registro
         System.out.print("Opcion: ");
         int op = leerInt();
         if (op == 1)
+        {
             califIndividual();
+        }
         else if (op == 2)
+        {
             califGrupo();
+        }
         else
+        {
             System.out.println("Opcion invalida");
+        }
     }
 
     private void califIndividual()
@@ -188,12 +193,13 @@ class Registro
             }
         }
         if (!hay)
+        {
             System.out.println("No hay alumnos en ese grupo");
-    }
+        }
     }
 
     public void consultar()
     {
-        System.out.println("Pendiente");
+        System.out.println("(Consulta de datos - Pendiente)");
     }
 }
