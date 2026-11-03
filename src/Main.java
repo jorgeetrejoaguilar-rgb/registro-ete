@@ -20,11 +20,20 @@ class Main
 
             switch (opcion)
             {
-                case 1: reg.registrar();     break;
-                case 2: reg.capturarCalif(); break;
-                case 3: reg.consultar();     break;
-                case 4: System.out.println("Adios"); break;
-                default: System.out.println("Opcion invalida");
+                case 1: 
+                    reg.registrar();     
+                    break;
+                case 2: 
+                    reg.capturarCalif(); 
+                    break;
+                case 3: 
+                    reg.consultar();     
+                    break;
+                case 4: 
+                    System.out.println("Adios"); 
+                    break;
+                default: 
+                    System.out.println("Opcion invalida");
             }
         }
         while (opcion != 4);
