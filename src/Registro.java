@@ -200,6 +200,7 @@ class Registro
 
     public void consultar()
     {
-        System.out.println("(Consulta de datos - Pendiente)");
+        Consulta c = new Consulta(teclado, alumnos, total);
+        c.consultar();
     }
 }
